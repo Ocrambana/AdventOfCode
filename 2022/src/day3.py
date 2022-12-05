@@ -9,16 +9,23 @@ if __name__ == '__main__':
     print("day 3")
     totalPriority = 0
     with open(r"../data/3-input.txt","r") as data:
-        for line in data:
-            halfLength = int((len(line) - 1) * 0.5)
-            sac1 = line[0:halfLength]
-            sac2 = line[halfLength:]
+        flag = True
+        one = data.readline()
+        two = data.readline()
+        three = data.readline()
 
-            print(line +" -> " + sac1 +" + " + sac2)
-            for c in sac1:
-                if sac2.find(c) >= 0:
-                    totalPriority = totalPriority + getPriority(c)
-                    print("Same element " + c + " priority " + str(getPriority(c)))
-                    break
+        while flag:
+            for c in one:
+                ind = two.find(c)
+                if ind >= 0:
+                    if three.find(c) >= 0:
+                        totalPriority = totalPriority + getPriority(c)
+                        break
+
+            one = data.readline()
+            two = data.readline()
+            three = data.readline()
+
+            flag = one != "" and two != "" and three != ""
 
     print("Total sum of priorities " + str(totalPriority))
